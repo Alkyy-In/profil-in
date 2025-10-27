@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembuka - ALKYY Industries</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --alkyy-blue: #2563eb;
+            --alkyy-blue-dark: #1d4ed8;
+            --alkyy-light: #f8fafc;
+            --alkyy-dark: #0f172a;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+        
+        .cable-animation {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .cable-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--alkyy-blue), var(--alkyy-blue-dark));
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .cable-wire {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 150px;
+            background: linear-gradient(to top, transparent, var(--alkyy-blue));
+            transform-origin: bottom center;
+            animation: rotateWire 3s infinite linear;
+        }
+        
+        .cable-wire:nth-child(2) { animation-delay: 0.2s; transform: rotate(45deg); }
+        .cable-wire:nth-child(3) { animation-delay: 0.4s; transform: rotate(90deg); }
+        .cable-wire:nth-child(4) { animation-delay: 0.6s; transform: rotate(135deg); }
+        .cable-wire:nth-child(5) { animation-delay: 0.8s; transform: rotate(180deg); }
+        .cable-wire:nth-child(6) { animation-delay: 1.0s; transform: rotate(225deg); }
+        .cable-wire:nth-child(7) { animation-delay: 1.2s; transform: rotate(270deg); }
+        .cable-wire:nth-child(8) { animation-delay: 1.4s; transform: rotate(315deg); }
+        
+        .energy-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px white;
+            animation: energyFlow 2s infinite linear;
+        }
+        
+        .company-name {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+        }
+        
+        .company-name h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .company-name p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .progress-bar-container {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 30px auto 0;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.8s forwards;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--alkyy-blue), var(--alkyy-blue-dark));
+            border-radius: 2px;
+            animation: loadingProgress 2s ease-in-out 2s forwards;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 30px rgba(37, 99, 235, 0.6); }
+            100% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 50px rgba(37, 99, 235, 0.8); }
+        }
+        
+        @keyframes rotateWire {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes energyFlow {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+        
+        .skip-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(37, 99, 235, 0.2);
+            border: 1px solid var(--alkyy-blue);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.5s forwards;
+            transition: all 0.3s ease;
+        }
+        
+        .skip-btn:hover {
+            background: rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cable-animation {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .cable-core {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .company-name h1 {
+                font-size: 2rem;
+            }
+            
+            .company-name p {
+                font-size: 1rem;
+            }
+            
+            .progress-bar-container {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cable-animation {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .cable-core {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .company-name h1 {
+                font-size: 1.5rem;
+            }
+            
+            .company-name p {
+                font-size: 0.9rem;
+            }
+            
+            .progress-bar-container {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="text-center">
+            <div class="cable-animation">
+                <div class="cable-core"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="cable-wire"></div>
+                <div class="energy-pulse"></div>
+            </div>
+            
+            <div class="company-name">
+                <h1>ALKYY Industries</h1>
+                <p>Electrical Energy Solutions & Cable Installation Experts</p>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <button class="skip-btn" id="skipBtn">
+            <i class="fas fa-arrow-right me-2"></i>Skip to Main
+        </button>
+    </div>
+
+    <script>
+        // Loading screen functionality
+        const loadingScreen = document.getElementById('loadingScreen');
+        const skipBtn = document.getElementById('skipBtn');
+        const progressBar = document.getElementById('progressBar');
+        
+        // Function to hide loading screen and redirect to index
+        function hideLoadingScreen() {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+        
+        // Skip button click event
+        skipBtn.addEventListener('click', hideLoadingScreen);
+        
+        // Auto redirect after animation completes (4 seconds total)
+        setTimeout(hideLoadingScreen, 4000);
+        
+        // Simulate progress bar filling
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += 2;
+            progressBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(progressInterval);
+            }
+        }, 40);
+    </script>
+</body>
+</html>
+
