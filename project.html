@@ -509,10 +509,10 @@
             color: white;
         }
         
-        /* Back to menu button */
+        /* Back to menu button - FIXED POSITION BELOW NAVBAR */
         .back-to-menu {
             position: fixed;
-            top: 20px;
+            top: 80px; /* Moved below navbar (navbar height is 70px + 10px spacing) */
             left: 20px;
             background: linear-gradient(135deg, var(--alkyy-blue), var(--alkyy-blue-dark));
             color: white;
@@ -533,10 +533,17 @@
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
         }
+        
+        /* Adjust for mobile */
+        @media (max-width: 768px) {
+            .back-to-menu {
+                top: 70px; /* Adjusted for mobile navbar height */
+            }
+        }
     </style>
 </head>
 <body class="dark-theme">
-    <!-- Back to Menu Button -->
+    <!-- Back to Menu Button - Now positioned below navbar -->
     <a href="menu.html" class="back-to-menu" title="Back to Menu">
         <i class="fas fa-arrow-left"></i>
     </a>
