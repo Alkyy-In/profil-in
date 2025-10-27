@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALKYY Industries - Electrical Energy Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --alkyy-blue: #2563eb;
+            --alkyy-blue-dark: #1d4ed8;
+            --alkyy-light: #f8fafc;
+            --alkyy-dark: #0f172a;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .hero-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--alkyy-blue) 0%, var(--alkyy-blue-dark) 100%);
+            color: white;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--alkyy-blue);
+        }
+        
+        .card-project {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .card-project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        .offcanvas-header {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .contact-info {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--alkyy-blue);
+            color: white;
+            margin: 0 5px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+            
+            .navbar-brand span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <!-- Mobile menu button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-bolt text-primary me-2"></i>
+                <span>ALKYY-IN</span>
+            </a>
+            
+            <!-- Theme toggle -->
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Desktop menu -->
+            <div class="navbar-nav ms-auto d-none d-lg-flex">
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Offcanvas Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                <i class="fas fa-bolt text-primary me-2"></i>ALKYY-IN
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about" data-bs-dismiss="offcanvas">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects" data-bs-dismiss="offcanvas">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact" data-bs-dismiss="offcanvas">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">ALKYY Industries</h1>
+            <p class="lead mb-4">Powering the Future with Innovative Electrical Energy Solutions</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#projects" class="btn btn-light btn-lg px-4">Our Projects</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">About Us</h2>
+                <p class="text-muted">Discover our journey and expertise in electrical energy</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="position-relative">
+                        <div class="bg-primary rounded-3" style="height: 400px; background: linear-gradient(45deg, #2563eb, #1d4ed8);"></div>
+                        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+                            <i class="fas fa-industry fa-3x"></i>
+                            <p class="mt-2">Electrical Energy Excellence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Who We Are</h3>
+                    <p class="lead">ALKYY Industries (ALKYY-IN) is a leading provider of comprehensive electrical energy solutions, dedicated to powering progress through innovation and reliability.</p>
+                    <p>Founded with a vision to transform the electrical energy landscape, we specialize in designing, implementing, and maintaining cutting-edge electrical systems for industrial, commercial, and residential applications.</p>
+                    <p>Our team of certified engineers and technicians brings decades of combined experience, ensuring that every project meets the highest standards of safety, efficiency, and sustainability.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Industrial Power Systems</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Renewable Energy Integration</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Smart Grid Solutions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Energy Efficiency Audits</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Maintenance Services</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 24/7 Emergency Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Projects</h2>
+                <p class="text-muted">Explore our successful electrical energy implementations</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card card-project h-100 border-0 shadow-sm">
+                        <div class="bg-dark" style="height: 200px;"></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Industrial Power Plant</h5>
+                            <p class="card-text">Complete electrical infrastructure for a 50MW industrial power plant with smart monitoring systems.</p>
+                            <span class="badge bg-primary">Industrial</span>
+                            <span class="badge bg-success">Completed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card card-project h-100 border-0 shadow-sm">
+                        <div class="bg-dark" style="height: 200px;"></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Solar Farm Integration</h5>
+                            <p class="card-text">Integration of 10MW solar farm with existing grid infrastructure and energy storage solutions.</p>
+                            <span class="badge bg-warning text-dark">Renewable</span>
+                            <span class="badge bg-success">Completed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card card-project h-100 border-0 shadow-sm">
+                        <div class="bg-dark" style="height: 200px;"></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Smart City Grid</h5>
+                            <p class="card-text">Implementation of smart grid technology for urban electrical distribution with real-time monitoring.</p>
+                            <span class="badge bg-info">Smart Grid</span>
+                            <span class="badge bg-warning text-dark">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="text-muted">Get in touch with our electrical energy experts</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="contact-info bg-white p-4 shadow-sm">
+                        <h4 class="mb-3">Get In Touch</h4>
+                        <div class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                            <span>Jakarta, Indonesia</span>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-phone me-2 text-primary"></i>
+                            <span>+62 21 1234 5678</span>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-envelope me-2 text-primary"></i>
+                            <span>info@alkyy-industries.com</span>
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-clock me-2 text-primary"></i>
+                            <span>Monday - Friday: 8:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="social-icons mt-3">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-white p-4 shadow-sm">
+                        <h4 class="mb-3">Send us a Message</h4>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>ALKYY Industries</h5>
+                    <p>Powering the future with innovative electrical energy solutions since 2015.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2024 ALKYY Industries. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            body.classList.add('bg-dark', 'text-light');
+            body.classList.remove('bg-light', 'text-dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('bg-dark');
+            body.classList.toggle('text-light');
+            body.classList.toggle('bg-light');
+            body.classList.toggle('text-dark');
+            
+            if (body.classList.contains('bg-dark')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
