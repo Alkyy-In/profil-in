@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALKYY Industries - Electrical Energy Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --alkyy-blue: #2563eb;
+            --alkyy-blue-dark: #1d4ed8;
+            --alkyy-light-bg: #f8fafc;
+            --alkyy-dark-bg: #0f172a;
+            --alkyy-light-text: #0f172a;
+            --alkyy-dark-text: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+        
+        /* Theme variables */
+        body.light-theme {
+            background-color: var(--alkyy-light-bg);
+            color: var(--alkyy-light-text);
+        }
+        
+        body.dark-theme {
+            background-color: var(--alkyy-dark-bg);
+            color: var(--alkyy-dark-text);
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cable-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .cable-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--alkyy-blue), transparent);
+            height: 2px;
+            animation: pulseLine 3s infinite ease-in-out;
+        }
+        
+        .cable-line:nth-child(2) { top: 20%; left: 10%; width: 60%; animation-delay: 0.5s; }
+        .cable-line:nth-child(3) { top: 40%; left: 30%; width: 50%; animation-delay: 1s; }
+        .cable-line:nth-child(4) { top: 60%; left: 20%; width: 70%; animation-delay: 1.5s; }
+        .cable-line:nth-child(5) { top: 80%; left: 40%; width: 40%; animation-delay: 2s; }
+        
+        .connection-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--alkyy-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--alkyy-blue);
+            animation: pulsePoint 2s infinite alternate;
+        }
+        
+        .connection-point:nth-child(6) { top: 20%; left: 70%; animation-delay: 0.2s; }
+        .connection-point:nth-child(7) { top: 40%; left: 80%; animation-delay: 0.4s; }
+        .connection-point:nth-child(8) { top: 60%; left: 90%; animation-delay: 0.6s; }
+        .connection-point:nth-child(9) { top: 80%; left: 80%; animation-delay: 0.8s; }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--alkyy-blue), var(--alkyy-blue-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .gallery-section {
+            margin: 60px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+        }
+        
+        .enter-btn {
+            background: linear-gradient(45deg, var(--alkyy-blue), var(--alkyy-blue-dark));
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .enter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
+        }
+        
+        /* Animations */
+        @keyframes pulseLine {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+        
+        @keyframes pulsePoint {
+            0% { transform: scale(1); box-shadow: 0 0 10px var(--alkyy-blue); }
+            100% { transform: scale(1.2); box-shadow: 0 0 30px var(--alkyy-blue); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .gallery-item {
+                height: 200px;
+            }
+            
+            .hero-section {
+                min-height: auto;
+                padding: 80px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 0.9rem;
+            }
+            
+            .gallery-item {
+                height: 180px;
+            }
+            
+            .enter-btn {
+                padding: 10px 30px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Light theme adjustments */
+        body.light-theme .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.2);
+            color: #0f172a;
+        }
+        
+        body.light-theme .theme-toggle-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        body.light-theme .cable-line {
+            background: linear-gradient(90deg, transparent, #1d4ed8, transparent);
+        }
+        
+        body.light-theme .connection-point {
+            background: #1d4ed8;
+            box-shadow: 0 0 20px #1d4ed8;
+        }
+        
+        body.light-theme .enter-btn {
+            background: linear-gradient(45deg, #2563eb, #1d4ed8);
+            color: white;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Cable Network Background -->
+    <div class="cable-network">
+        <div class="cable-line"></div>
+        <div class="cable-line"></div>
+        <div class="cable-line"></div>
+        <div class="cable-line"></div>
+        <div class="cable-line"></div>
+        <div class="connection-point"></div>
+        <div class="connection-point"></div>
+        <div class="connection-point"></div>
+        <div class="connection-point"></div>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <div class="logo">ALKYY-IN</div>
+                </div>
+                <p class="tagline">Electrical Energy Solutions & Professional Cable Installation</p>
+                <button class="enter-btn" id="enterBtn">
+                    <i class="fas fa-arrow-right me-2"></i>Enter Website
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/600x400/2563eb/ffffff?text=Industrial+Power+Plant" alt="Industrial Power Plant">
+                        <div class="gallery-overlay">
+                            <h5>Industrial Power Systems</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/600x400/1d4ed8/ffffff?text=Solar+Installation" alt="Solar Installation">
+                        <div class="gallery-overlay">
+                            <h5>Renewable Energy</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Smart+Grid" alt="Smart Grid">
+                        <div class="gallery-overlay">
+                            <h5>Smart Grid Technology</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Cable+Installation" alt="Cable Installation">
+                        <div class="gallery-overlay">
+                            <h5>Professional Installation</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/600x400/93c5fd/ffffff?text=Maintenance" alt="Maintenance">
+                        <div class="gallery-overlay">
+                            <h5>24/7 Maintenance</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/600x400/c7d2fe/000000?text=Energy+Efficiency" alt="Energy Efficiency">
+                        <div class="gallery-overlay">
+                            <h5>Energy Efficiency</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Enter button functionality
+        const enterBtn = document.getElementById('enterBtn');
+        enterBtn.addEventListener('click', () => {
+            // Add smooth transition effect
+            document.querySelector('.hero-section').style.opacity = '0';
+            document.querySelector('.gallery-section').style.opacity = '0';
+            
+            setTimeout(() => {
+                window.location.href = 'menu.html';
+            }, 500);
+        });
+        
+        // Initialize gallery with fade-in effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 300 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>
+
